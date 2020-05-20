@@ -52,7 +52,7 @@ const soundSetOne = [
         keyCode: 67,
         keyTrigger: 'C',
         src: './soundSetOne/Brk_Snr.mp3'
-    },
+    }
 ];
 
 exports.soundSetOne = soundSetOne;
