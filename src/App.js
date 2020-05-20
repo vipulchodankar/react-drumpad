@@ -1,24 +1,35 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import DrumPad from './components/DrumPad'
-import {data} from './data/data'
+import {soundSetOne} from './data/data'
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      pads: data
+      pads: soundSetOne,
+      display: ''
     }
+
+    this.updateDisplay = this.updateDisplay.bind(this);
   }
   
+  updateDisplay(text) {
+    this.setState({
+      pads: this.state.pads,
+      display: text
+    });
+  }
+
   render() {
     return (
       <div id="drum-machine">
         <div id="display">
-          {
-            this.state.pads.map((pad) => (<DrumPad key={pad.id} audioId={pad.id} keyCode={pad.keyCode} keyTrigger={pad.keyTrigger} src={pad.src}/>))
-          }
+          { this.state.display }
+        </div>
+        <div id="pads">
+          { this.state.pads.map((pad) => (<DrumPad key={pad.id} audioId={pad.id} keyCode={pad.keyCode} keyTrigger={pad.keyTrigger} src={pad.src} updateDisplay={this.updateDisplay}/>)) }
         </div>
       </div>
     )
