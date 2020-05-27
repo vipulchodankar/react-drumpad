@@ -37,9 +37,11 @@ class DrumPad extends Component {
     }
 
     handleKeyPress(event) {
-        if(event.keyCode === this.props.keyCode){
+        if(event.repeat)
+            return
+
+        if(event.keyCode === this.props.keyCode)
             this.playAudio();
-        }
     }
 
     componentWillUnmount() {
@@ -49,7 +51,8 @@ class DrumPad extends Component {
     render() {
         return (
             <div className="drum-pad" onClick={this.playAudio} id={this.props.audioId}>
-                <audio className="clip" id={this.props.keyTrigger} src={this.props.src}></audio>
+                <audio className="clip" id={this.props.keyTrigger} src={this.props.src}>
+                </audio>
               {this.props.keyTrigger}
             </div>
         )
