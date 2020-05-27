@@ -1,45 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.scss';
 import DrumPad from './components/DrumPad'
-import {soundSetOne} from './data/soundSetOne'
+import { soundSetOne } from './data/soundSetOne'
 // import {soundSetTwo} from './data/soundSetTwo'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.state = {
-      pads: soundSetOne,
-      display: ''
-    }
+const App = () => {
+  const [pads] = useState(soundSetOne);
+  const [display, setDisplay] = useState('')
 
-    this.updateDisplay = this.updateDisplay.bind(this);
-  }
-  
-  updateDisplay(text) {
-    this.setState({
-      pads: this.state.pads,
-      display: text
-    });
-  }
-
-  render() {
-    return (
-      <div id="drum-machine">
-        <div id="display">
-          { this.state.display }
-        </div>
-        <div id="soundSet">
-          
-        </div>
-        <div id="pads">
-          { this.state.pads.map((pad) => (<
-            DrumPad key={pad.id} audioId={pad.id} keyCode={pad.keyCode} keyTrigger={pad.keyTrigger} src={pad.src} updateDisplay={this.updateDisplay}/>
-          )) }
-        </div>
+  return (
+    <div id="drum-machine">
+      <header>
+        <h1>Drum Machine</h1>
+        <p>How to use: Tap a drumpad or click the corresponding key. Have fun!</p>
+      </header>
+      <div id="display">
+        {display}
       </div>
-    )
-  }
-};
+      <div id="pads">
+        {pads.map(pad => (
+          <DrumPad
+            key={pad.id}
+            audioId={pad.id}
+            keyCode={pad.keyCode}
+            keyTrigger={pad.keyTrigger}
+            src={pad.src}
+            updateDisplay={setDisplay}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 
 export default App;

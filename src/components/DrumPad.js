@@ -1,62 +1,53 @@
-import React, {Component} from 'react';
-import './DrumPad.scss';
+import React, { useEffect, useCallback } from 'react'
+import './DrumPad.scss'
 
-class DrumPad extends Component {
-    constructor(props) {
-        super(props);
+const DrumPad = ({ audioId, keyCode, keyTrigger, src, updateDisplay }) => {
 
-        this.playAudio = this.playAudio.bind(this);
-        this.handleKeyPress = this.handleKeyPress.bind(this);
+    const getRandomColor = () => {
+        const red = Math.random() * 255
+        const green = Math.random() * 255
+        const blue = Math.random() * 255
+        return { red, green, blue }
     }
 
-    componentDidMount() {
-        document.addEventListener('keydown', this.handleKeyPress);
-    }
+    const playAudio = useCallback(() => {
+        const audio = document.getElementById(keyTrigger)
+        audio.currentTime = 0
+        audio.parentNode.classList.add("active")
+        audio.play()
+        updateDisplay(keyTrigger)
 
-    getRandomColor() {
-        const red = Math.random() * 255;
-        const green = Math.random() * 255;
-        const blue = Math.random() * 255;
-        return {red, green, blue};
-    }
+        const drumMachine = document.getElementById("drum-machine")
+        const { red, green, blue } = getRandomColor()
+        drumMachine.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')'
 
-    playAudio() {
-        const audio = document.getElementById(this.props.keyTrigger);
-        audio.currentTime = 0;
-        audio.parentNode.classList.add("active");
-        audio.play();
-        this.props.updateDisplay(this.props.keyTrigger);
-
-        const drumMachine = document.getElementById("drum-machine");
-        const {red, green, blue} = this.getRandomColor();
-        drumMachine.style.backgroundColor = 'rgb(' + red + ',' + green + ',' + blue + ')';
-        
         setTimeout(() => {
-            audio.parentNode.classList.remove("active");
-        }, 400);
-    }
+            audio.parentNode.classList.remove("active")
+        }, 400)
+    }, [keyTrigger, updateDisplay])
 
-    handleKeyPress(event) {
-        if(event.repeat)
+    const handleKeyPress = useCallback(event => {
+        if (event.repeat)
             return
 
-        if(event.keyCode === this.props.keyCode)
-            this.playAudio();
-    }
+        if (event.keyCode === keyCode)
+            playAudio()
+    }, [playAudio, keyCode])
 
-    componentWillUnmount() {
-        document.addRemoveListener('keydown', this.handleKeyPress);
-    }
+    
 
-    render() {
-        return (
-            <div className="drum-pad" onClick={this.playAudio} id={this.props.audioId}>
-                <audio className="clip" id={this.props.keyTrigger} src={this.props.src}>
-                </audio>
-              {this.props.keyTrigger}
-            </div>
-        )
-    }
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyPress)
+        return () => document.addRemoveListener('keydown', handleKeyPress)
+    }, [handleKeyPress])
+
+    return (
+        <div className="drum-pad" onClick={playAudio} id={audioId}>
+            <audio className="clip" id={keyTrigger} src={src}>
+            </audio>
+            {keyTrigger}
+        </div>
+    )
 }
 
-export default DrumPad;
+export default DrumPad 
