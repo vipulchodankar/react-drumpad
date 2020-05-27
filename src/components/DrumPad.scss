@@ -1,27 +1,19 @@
-.drum-pad{
-    background: #303030;
-    border-radius: 10px;
-    border: 5px solid #fff;
-    margin: 10px;
-    height: 80px;
-    line-height: 70px;
-    font-size: 24px;
-    font-weight: 700;
-    // padding: 10px;
-    text-align: center;
-    box-shadow: 0 6px 25px #424242;
-    
+.drum-pad {
+  background: #303030;
+  border-radius: 1.25rem;
+  border: 5px solid #fff;
+  margin: 0.625rem;
+  height: 5rem;
+  line-height: 4.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 0.5rem 1.5rem #212121;
 }
 
 .active {
-    background: white;
-    border-color: #212121;
-    color: #212121;
-    transition: all 0.3 ease-in-out;
-}
-
-@keyframes tap {
-    to {
-        
-    }
+  background: white;
+  border-color: #212121;
+  color: #212121;
+  transition: all 0.3 ease-in-out;
 }

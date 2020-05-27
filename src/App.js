@@ -29,6 +29,9 @@ const App = () => {
           />
         ))}
       </div>
+      <footer id="footer">
+        <a href="https://github.com/vipulchodankar/react-drumpad">View the source code on GitHub</a> 
+      </footer>
     </div>
   )
 }

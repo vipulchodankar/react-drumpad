@@ -5,7 +5,7 @@
 }
 
 #drum-machine {
-  padding: 20px;
+  padding: 1.5rem;
   background: #212121;
   color: #fff;
   height: 100vh;
@@ -14,7 +14,7 @@
     padding: 1rem;
     text-align: center;
     p {
-      padding: 1rem;
+      padding: 1.5rem;
     }
     text-shadow: 2px 2px 5px #212121;
   }
@@ -23,16 +23,15 @@
     text-align: center;
     margin: 0 auto;
     width: 20vw;
-    height: 50px;
-    line-height: 50px;
-    // border: 5px solid #fff;
+    height: 3rem;
+    line-height: 3rem;
     background: #fff;
     color: #212121;
-    font-size: 30px;
+    font-size: 2rem;
     font-weight: 800;
-    margin-top:20px ;
-    margin-bottom: 50px;
-    box-shadow: 0px 0px 50px #646464;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0rem 0rem 1rem #696969;
   }
 
   #pads {
@@ -41,9 +40,33 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
   }
+
+  #footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem 0rem;
+    text-align: center;
+    background: #303030;
+    a {
+      text-decoration: none;
+      color: #eee;
+      
+      &:visited {
+        color: #eee;
+      }
+
+      &:hover {
+        color: #0069ff;
+        transition: all 0.3s ease-in-out;
+      }
+
+    }
+  }
 }
 
-@media (max-width: 768px) {
+@media only screen and (max-width: 768px) {
   #drum-machine {
     #display {
       width: 40vw;
@@ -55,16 +78,31 @@
   }
 }
 
-@media (max-width: 550px) {
+@media only screen and (max-width: 550px) {
   #drum-machine {
     #display {
       width: 60vw;
     }
 
-    #pads {
-      position: fixed;
-      bottom: 50px;
+    #pads {      
       width: 90vw;
+    }
+  }
+}
+
+@media only screen and (max-height: 640px) {
+  #drum-machine {
+    header {
+      padding: 1rem;
+
+      P {
+        padding: 0.75rem;
+      }
+    }
+
+    #display {
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
     }
   }
 }
